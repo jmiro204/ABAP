@@ -103,15 +103,6 @@ CLASS lhc_inventory DEFINITION INHERITING FROM cl_abap_behavior_handler.
       reCalculateInventory FOR MODIFY
         IMPORTING keys FOR ACTION Inventory~reCalculateInventory.
 
-*    CONSTANTS :
-*      BEGIN OF bgpf_state,
-*        unknown         TYPE int1 VALUE IS INITIAL,
-*        erroneous       TYPE int1 VALUE 1,
-*        new             TYPE int1 VALUE 2,
-*        running         TYPE int1 VALUE 3,
-*        successful      TYPE int1 VALUE 4,
-*        started_from_bo TYPE int1 VALUE 99,
-*      END OF bgpf_state.
 
 ENDCLASS.
 
@@ -119,19 +110,16 @@ CLASS lhc_inventory IMPLEMENTATION.
   METHOD get_global_authorizations.
   ENDMETHOD.
   METHOD calculateinventoryid.
+
     READ ENTITIES OF ZBGPFR_InventoryTP_006 IN LOCAL MODE
       ENTITY Inventory
         ALL FIELDS WITH CORRESPONDING #( keys )
       RESULT DATA(entities).
+
     DELETE entities WHERE InventoryID IS NOT INITIAL.
     CHECK entities IS NOT INITIAL.
-    "Dummy logic to determine object_id
     SELECT MAX( inventory_id ) FROM zbgpf_inven_006 INTO @DATA(max_object_id).
-    "Add support for draft if used in modify
-    "SELECT SINGLE FROM FROM ZBGPFINVE00D_006 FIELDS MAX( InventoryID ) INTO @DATA(max_orderid_draft). "draft table
-    "if max_orderid_draft > max_object_id
-    " max_object_id = max_orderid_draft.
-    "ENDIF.
+
     MODIFY ENTITIES OF ZBGPFR_InventoryTP_006 IN LOCAL MODE
       ENTITY Inventory
         UPDATE FIELDS ( InventoryID )
@@ -139,6 +127,7 @@ CLASS lhc_inventory IMPLEMENTATION.
           %tky          = entity-%tky
           InventoryID     = max_object_id + i
     ) ).
+
   ENDMETHOD.
 
   METHOD reCalculateInventory.
@@ -165,28 +154,6 @@ CLASS lhc_inventory IMPLEMENTATION.
         UPDATE FIELDS ( BgpfStatus )
         WITH CORRESPONDING #( inventories ).
 
-*    LOOP AT keys ASSIGNING FIELD-SYMBOL(<key>).
-*
-*      READ ENTITIES OF ZBGPFR_InventoryTP_006 IN LOCAL MODE
-*       ENTITY Inventory
-*         ALL FIELDS "( Quantity QuantityUnit )
-*         WITH VALUE #( ( %tky = CORRESPONDING #( <key>-%tky ) ) )
-*       RESULT DATA(inventories).
-*
-*      DELETE inventories WHERE BgpfStatus = skip_bgpf_status_running .
-*      CHECK inventories IS NOT INITIAL.
-*
-*      MODIFY ENTITIES OF ZBGPFR_InventoryTP_006 IN LOCAL MODE
-*        ENTITY Inventory
-*          UPDATE FROM VALUE #( FOR <s_salooon> IN inventories ( %tky        = CORRESPONDING #( <s_salooon> )
-*                                                                Quantity = <s_salooon>-Quantity + 10
-*                                                                %control    = VALUE #( Quantity = if_abap_behv=>mk-on ) ) )
-*          REPORTED DATA(lt_reported).
-*
-*    ENDLOOP.
-*
-*    " not ok but for demo only one cinema is affected
-*    reported = CORRESPONDING #( DEEP lt_reported ) .
 
   ENDMETHOD.
 

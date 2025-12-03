@@ -1,0 +1,13 @@
+*CLASS lcl_inventory DEFINITION INHERITING FROM cl_abap_behavior_handler.
+*
+*  PUBLIC SECTION.
+*    METHODS: test IMPORTING iv_ TYPE boolean.
+*
+*  PROTECTED SECTION.
+*  PRIVATE SECTION.
+*ENDCLASS.
+*
+*
+*
+*CLASS lcl_inventory IMPLEMENTATION.
+*ENDCLASS.

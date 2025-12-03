@@ -1,31 +1,31 @@
 @AccessControl.authorizationCheck: #CHECK
 @EndUserText.label: 'Basic Interface View forInventory'
 define view entity ZBGPFI_Inventory_006
-  as select from ZBGPF_INVEN_006 as Inventory
+  as select from zbgpf_inven_006 as Inventory
 {
-  key UUID as UUID,
-  INVENTORY_ID as InventoryID,
-  PRODUCT_ID as ProductID,
-  @Semantics.quantity.unitOfMeasure: 'QuantityUnit'
-  QUANTITY as Quantity,
-  QUANTITY_UNIT as QuantityUnit,
-  @Semantics.amount.currencyCode: 'CurrencyCode'
-  PRICE as Price,
-  CURRENCY_CODE as CurrencyCode,
-  REMARK as Remark,
-  NOT_AVAILABLE as NotAvailable,
-  BGPF_STATUS as BgpfStatus,
-  BGPG_PROCESS_NAME as BgpgProcessName,
-  APPL_LOG_HANDLE as ApplLogHandle,
-  @Semantics.user.createdBy: true
-  CREATED_BY as CreatedBy,
-  @Semantics.systemDateTime.createdAt: true
-  CREATED_AT as CreatedAt,
-  @Semantics.user.lastChangedBy: true
-  LAST_CHANGED_BY as LastChangedBy,
-  @Semantics.systemDateTime.lastChangedAt: true
-  LAST_CHANGED_AT as LastChangedAt,
-  @Semantics.systemDateTime.localInstanceLastChangedAt: true
-  LOCAL_LAST_CHANGED_AT as LocalLastChangedAt
-  
+  key uuid                  as UUID,
+      inventory_id          as InventoryID,
+      product_id            as ProductID,
+      @Semantics.quantity.unitOfMeasure: 'QuantityUnit'
+      quantity              as Quantity,
+      quantity_unit         as QuantityUnit,
+      @Semantics.amount.currencyCode: 'CurrencyCode'
+      price                 as Price,
+      currency_code         as CurrencyCode,
+      remark                as Remark,
+      not_available         as NotAvailable,
+      bgpf_status           as BgpfStatus,
+      bgpg_process_name     as BgpgProcessName,
+      appl_log_handle       as ApplLogHandle,
+      @Semantics.user.createdBy: true
+      created_by            as CreatedBy,
+      @Semantics.systemDateTime.createdAt: true
+      created_at            as CreatedAt,
+      @Semantics.user.lastChangedBy: true
+      last_changed_by       as LastChangedBy,
+      @Semantics.systemDateTime.lastChangedAt: true
+      last_changed_at       as LastChangedAt,
+      @Semantics.systemDateTime.localInstanceLastChangedAt: true
+      local_last_changed_at as LocalLastChangedAt
+
 }

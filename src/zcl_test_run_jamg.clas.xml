@@ -3,16 +3,13 @@
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <VSEOCLASS>
-    <CLSNAME>ZBGPFBP_R_INVENTORYTP_006</CLSNAME>
+    <CLSNAME>ZCL_TEST_RUN_JAMG</CLSNAME>
     <LANGU>E</LANGU>
-    <DESCRIPT>Behavior implementation</DESCRIPT>
-    <CATEGORY>06</CATEGORY>
+    <DESCRIPT>Test</DESCRIPT>
     <STATE>1</STATE>
     <CLSCCINCL>X</CLSCCINCL>
     <FIXPT>X</FIXPT>
     <UNICODE>X</UNICODE>
-    <CLSDEFINT>ZBGPFR_INVENTORYTP_006</CLSDEFINT>
-    <WITH_UNIT_TESTS>X</WITH_UNIT_TESTS>
    </VSEOCLASS>
   </asx:values>
  </asx:abap>
